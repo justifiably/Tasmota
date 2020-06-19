@@ -45,34 +45,6 @@
  * power will fallback to a given safe value until a new value is provided. Set
  * the interval to 0 to disable this feature.
  *
- * Usage:
- * Place this file in the sonoff folder.
- * Clone the library https://github.com/colinl/process-control.git from Github
- * into a subfolder of lib.
- * In user_config.h or user_config_override.h for a single relay, include
- * code as follows:
-
- #define USE_TIMEPROP    //  include the timeprop feature (+1.2k)
-   // for single output
-   #define TIMEPROP_NUM_OUTPUTS          1       // how many outputs to control (with separate alogorithm for each)
-   #define TIMEPROP_CYCLETIMES           60      // cycle time seconds
-   #define TIMEPROP_DEADTIMES            0       // actuator action time seconds
-   #define TIMEPROP_OPINVERTS            false   // whether to invert the output
-   #define TIMEPROP_FALLBACK_POWERS      0       // falls back to this if too long betwen power updates
-   #define TIMEPROP_MAX_UPDATE_INTERVALS 120     // max no secs that are allowed between power updates (0 to disable)
-   #define TIMEPROP_RELAYS               1       // which relay to control 1:8
-
- * or for two relays:
- #define USE_TIMEPROP    //  include the timeprop feature (+1.2k)
-   // for single output
-   #define TIMEPROP_NUM_OUTPUTS          2               // how many outputs to control (with separate alogorithm for each)
-   #define TIMEPROP_CYCLETIMES           60,     10      // cycle time seconds
-   #define TIMEPROP_DEADTIMES            0,      0       // actuator action time seconds
-   #define TIMEPROP_OPINVERTS            false,  false   // whether to invert the output
-   #define TIMEPROP_FALLBACK_POWERS      0,      0       // falls back to this if too long betwen power updates
-   #define TIMEPROP_MAX_UPDATE_INTERVALS 120,    120     // max no secs that are allowed between power updates (0 to disable)
-   #define TIMEPROP_RELAYS               1,      2       // which relay to control 1:8
-
  * Publish values between 0 and 1 to the topic(s) described above
  *
 **/
@@ -80,7 +52,7 @@
 
 #ifdef USE_TIMEPROP
 
-# include "Timeprop.h"
+#include "Timeprop.h"
 
 #define D_CMND_TIMEPROP "timeprop_"
 #define D_CMND_TIMEPROP_SETPOWER "setpower_"    // add index no on end (0:8) and data is power 0:1
